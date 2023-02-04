@@ -1,12 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {
-  utilities as nestWinstonModuleUtilities,
-  WinstonModule,
-} from 'nest-winston';
-import * as winston from 'winston';
-import * as WinstonCloudWatch from 'winston-cloudwatch';
-import {
   createBullBoard,
   BullAdapter,
   ExpressAdapter,

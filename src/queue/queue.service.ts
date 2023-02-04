@@ -4,7 +4,7 @@ import { Job, JobStatus, Queue } from 'bull';
 
 @Injectable()
 export class QueueService {
-  constructor(@InjectQueue('queue') private queue: Queue) {}
+  constructor(@InjectQueue('queue') private queue: Queue) { }
 
   async getQueueStatus() {
     return this.queue.client.status;
@@ -75,4 +75,5 @@ export class QueueService {
   //   //determine if it's a valid url
   //   return `${url}, ${id}, ${raw_text}`;
   // }
+  //get rid of this
 }

@@ -16,16 +16,14 @@ import { Queue } from 'bull';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
+
   const serverAdapter = new ExpressAdapter();
   serverAdapter.setBasePath('/bull-board');
-
   const aQueue = app.get<Queue>(`BullQueue_queue`);
-
   createBullBoard({
     queues: [new BullAdapter(aQueue)],
     serverAdapter,
   });
-
   app.use('/bull-board', serverAdapter.getRouter());
 
   await app.listen(process.env.PORT || 3000);

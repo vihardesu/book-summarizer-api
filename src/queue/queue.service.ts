@@ -68,12 +68,4 @@ export class QueueService {
     );
     return result;
   }
-
-  // /* fix a failed job where return value is an error by passing in raw text to summarizer */
-  // async fixJob(id, url, raw_text) {
-  //   //get the url of the job id
-  //   //determine if it's a valid url
-  //   return `${url}, ${id}, ${raw_text}`;
-  // }
-  //get rid of this
 }

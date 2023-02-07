@@ -22,8 +22,8 @@ export class BooksService {
     return this.bookRepository.find();
   }
 
-  findBooksByName(name: string) {
-    return this.bookRepository.findOne({ where: { name: name } });
+  findBooksByTitle(title: string) {
+    return this.bookRepository.findOne({ where: { title: title } });
   }
 
   // UPDATE

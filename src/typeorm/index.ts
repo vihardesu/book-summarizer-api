@@ -1,7 +1,6 @@
-import { Customer } from "./customer.entity";
-import { User } from "./user.entity";
+import { Books } from "./book.entity";
 
-const entities = [User, Customer];
+const entities = [Books];
 
-export {User, Customer};
+export { Books };
 export default entities;

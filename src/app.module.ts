@@ -1,10 +1,10 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { QueueModule } from './queue/queue.module';
-import { UsersModule } from './users/users.module';
+import { BooksModule } from './books/books.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './typeorm';
 @Module({
@@ -36,7 +36,7 @@ import entities from './typeorm';
       }),
       inject: [ConfigService],
     }),
-    UsersModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -22,8 +22,8 @@ export class ChaptersService {
     return this.chapterRepository.find();
   }
 
-  findChapterByName(name: string) {
-    return this.chapterRepository.findOne({ where: { name: name } });
+  findChapterById(cid: number) {
+    return this.chapterRepository.findOne({ where: { id: cid } })
   }
 
   // UPDATE

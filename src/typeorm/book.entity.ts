@@ -3,15 +3,10 @@ import { Chapter } from 'src/typeorm/chapter.entity';
 
 @Entity()
 export class Book {
-    @PrimaryGeneratedColumn({
-        type: 'bigint',
-        name: 'bid',
-    })
-    id: number;
-
     @PrimaryColumn({
         nullable: false,
         default: '',
+        name: "isbn_ten"
     })
     isbn_ten: string;
 
@@ -75,11 +70,11 @@ export class Book {
         nullable: false,
         default: '',
     })
-    isbn_13: string;
+    isbn_thirteen: string;
 
 
     @OneToMany(type => Chapter, chapter => chapter.book, {
         cascade: true
     })
-    isbn_10: string;
+    chapters: Chapter[];
 }

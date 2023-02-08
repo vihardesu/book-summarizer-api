@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { QueueModule } from './queue/queue.module';
 import { BooksModule } from './books/books.module';
+import { ChaptersModule } from './chapters/chapters.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './typeorm';
 @Module({
@@ -37,6 +38,7 @@ import entities from './typeorm';
       inject: [ConfigService],
     }),
     BooksModule,
+    ChaptersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

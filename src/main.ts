@@ -16,10 +16,10 @@ async function bootstrap() {
 
   // Swagger UI
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Book Summaries API')
+    .setDescription('endpoints to manage book summaries')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('books')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

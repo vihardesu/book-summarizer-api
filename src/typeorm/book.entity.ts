@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, PrimaryColumn, OneToMany } from 'typeorm';
 import { Chapter } from 'src/typeorm/chapter.entity';
+import { Summary } from './summary.entity';
 
 @Entity()
 export class Book {
@@ -77,4 +78,9 @@ export class Book {
         cascade: true
     })
     chapters: Chapter[];
+
+    @OneToMany(type => Summary, summary => summary.book, {
+        cascade: true
+    })
+    summaries: Summary[];
 }

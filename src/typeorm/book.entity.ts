@@ -1,12 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, PrimaryColumn, OneToMany } from 'typeorm';
+import { Chapter } from 'src/typeorm/chapter.entity';
+import { Summary } from './summary.entity';
 
 @Entity()
-export class Books {
-    @PrimaryGeneratedColumn({
-        type: 'bigint',
-        name: 'bid',
+export class Book {
+    @PrimaryColumn({
+        nullable: false,
+        default: '',
+        name: "isbn_ten"
     })
-    id: number;
+    isbn_ten: string;
 
     @Column({
         nullable: false,
@@ -68,11 +71,16 @@ export class Books {
         nullable: false,
         default: '',
     })
-    isbn_13: string;
+    isbn_thirteen: string;
 
-    @Column({
-        nullable: false,
-        default: '',
+
+    @OneToMany(type => Chapter, chapter => chapter.book, {
+        cascade: true
     })
-    isbn_10: string;
+    chapters: Chapter[];
+
+    @OneToMany(type => Summary, summary => summary.book, {
+        cascade: true
+    })
+    summaries: Summary[];
 }

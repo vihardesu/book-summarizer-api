@@ -1,6 +1,7 @@
-import { Books } from "./book.entity";
+import { Book } from "./book.entity";
+import { Chapter } from "./chapter.entity";
+import { Summary } from "./summary.entity";
 
-const entities = [Books];
+const entities = [Book, Chapter, Summary];
 
-export { Books };
 export default entities;

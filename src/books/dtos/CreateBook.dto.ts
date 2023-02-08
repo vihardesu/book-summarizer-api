@@ -30,10 +30,10 @@ export class CreateBookDto {
     thumbnail: string;
 
     @IsNotEmpty()
-    @IsISBN()
-    isbn_10: string;
+    @IsString()
+    isbn_ten: string;
 
     @IsNotEmpty()
-    @IsISBN()
-    isbn_13: string;
+    @IsString()
+    isbn_thirteen: string;
 }

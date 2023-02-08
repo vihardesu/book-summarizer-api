@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Books } from 'src/typeorm';
+import { Book } from 'src/typeorm/book.entity';
 import { Repository } from 'typeorm';
 import { CreateBookDto } from 'src/books/dtos/CreateBook.dto';
 import { UpdateBookDto } from 'src/books/dtos/UpdateBook.dto';
@@ -8,7 +8,7 @@ import { UpdateBookDto } from 'src/books/dtos/UpdateBook.dto';
 @Injectable()
 export class BooksService {
   constructor(
-    @InjectRepository(Books) private readonly bookRepository: Repository<Books>,
+    @InjectRepository(Book) private readonly bookRepository: Repository<Book>,
   ) { }
 
   // CREATE
@@ -22,17 +22,17 @@ export class BooksService {
     return this.bookRepository.find();
   }
 
-  findBooksByTitle(title: string) {
+  findBookByTitle(title: string) {
     return this.bookRepository.findOne({ where: { title: title } });
   }
 
   // UPDATE
-  updateBook(bid: number, updateBookDto: UpdateBookDto) {
-    return this.bookRepository.update(bid, updateBookDto);
+  updateBook(isbn_ten: string, updateBookDto: UpdateBookDto) {
+    return this.bookRepository.update(isbn_ten, updateBookDto);
   }
 
   // DELETE
-  async deleteBook(bid: number): Promise<void> {
-    await this.bookRepository.delete(bid);
+  async deleteBook(isbn_ten: string): Promise<void> {
+    await this.bookRepository.delete(isbn_ten);
   }
 }

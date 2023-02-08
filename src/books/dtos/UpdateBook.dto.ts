@@ -30,10 +30,6 @@ export class UpdateBookDto {
     thumbnail: string;
 
     @IsNotEmpty()
-    @IsISBN()
-    isbn_10: string;
-
-    @IsNotEmpty()
-    @IsISBN()
-    isbn_13: string;
+    @IsString()
+    isbn_thirteen: string;
 }

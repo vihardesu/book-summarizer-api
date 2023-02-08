@@ -10,6 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateBookDto } from 'src/books/dtos/CreateBook.dto';
+import { UpdateBookDto } from 'src/books/dtos/UpdateBook.dto';
 import { BooksService } from 'src/books/services/books/books.service';
 
 @Controller('books')
@@ -29,13 +30,19 @@ export class BooksController {
 
   @Get('title/:title')
   findBooksById(@Param('title') title: string) {
-    return this.bookService.findBooksByTitle(title);
+    return this.bookService.findBookByTitle(title);
   }
 
-  @Delete('delete/:bid')
+  @Delete('delete/:isbn_ten')
   @UsePipes(ValidationPipe)
-  deleteBook(@Param('bid', ParseIntPipe) bid: number) {
-    return this.bookService.deleteBook(bid);
+  deleteBook(@Param('isbn_ten') isbn_ten: string) {
+    return this.bookService.deleteBook(isbn_ten);
+  }
+
+  @Post('update/:isbn_ten')
+  @UsePipes(ValidationPipe)
+  updateBook(@Param('isbn_ten') isbn_ten: string, @Body() updateBookDto: UpdateBookDto) {
+    return this.bookService.updateBook(isbn_ten, updateBookDto);
   }
 
 }

@@ -34,6 +34,12 @@ export class SummariesController {
     return this.summaryService.findSummaryById(sid);
   }
 
+  @Get('isbn_ten/:isbn_ten')
+  @UsePipes(ValidationPipe)
+  findSummariesByIsbnTen(@Param('isbn_ten') isbn_ten: string) {
+    return this.summaryService.findSummariesByIsbnTen(isbn_ten);
+  }
+
   @Delete('delete/:sid')
   @UsePipes(ValidationPipe)
   deleteSummary(@Param('sid', ParseIntPipe) sid: number) {

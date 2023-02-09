@@ -7,12 +7,17 @@ import {
 } from '@bull-board/express';
 import { Queue } from 'bull';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { urlencoded, json } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Enable CORS
   app.enableCors();
+
+  // Set max payload for JSON and URL encoded bodies
+  app.use(json({ limit: '1mb' }));
+  app.use(urlencoded({ extended: true, limit: '1mb' }));
 
   // Swagger UI
   const config = new DocumentBuilder()

@@ -26,6 +26,10 @@ export class SummariesService {
     return this.summaryRepository.findOne({ where: { id: sid } })
   }
 
+  findSummariesByIsbnTen(isbn_ten: string) {
+    return this.summaryRepository.find({ where: { isbn_ten: isbn_ten } })
+  }
+
   // UPDATE
   updateSummary(sid: number, updateSummaryDto: UpdateSummaryDto) {
     return this.summaryRepository.update(sid, updateSummaryDto);

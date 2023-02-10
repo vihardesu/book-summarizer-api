@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { Book } from 'src/typeorm/book.entity';
+import { ChapterSummary } from 'src/typeorm/chapter_summary.entity';
 
 @Entity()
 export class Chapter {
@@ -34,4 +35,10 @@ export class Chapter {
     @ManyToOne(() => Book, (book) => book.chapters, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     @JoinColumn({ name: "isbn_ten" })
     book: Book
+
+    // add relationship to chapter summaries
+    @OneToMany(type => ChapterSummary, chapter_summary => chapter_summary.chapter, {
+        cascade: true
+    })
+    chapter_summaries: ChapterSummary[];
 }

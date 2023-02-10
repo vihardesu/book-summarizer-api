@@ -9,6 +9,7 @@ import { ChaptersModule } from './chapters/chapters.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './typeorm';
 import { SummariesModule } from './summaries/summaries.module';
+import { ChapterSummariesModule } from './chapter_summaries/chapter_summaries.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -41,6 +42,7 @@ import { SummariesModule } from './summaries/summaries.module';
     BooksModule,
     ChaptersModule,
     SummariesModule,
+    ChapterSummariesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

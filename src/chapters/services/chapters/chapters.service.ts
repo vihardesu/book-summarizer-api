@@ -26,6 +26,10 @@ export class ChaptersService {
     return this.chapterRepository.findOne({ where: { id: cid } })
   }
 
+  getChaptersByIsbnTen(isbn_ten: string) {
+    return this.chapterRepository.find({ where: { isbn_ten: isbn_ten } })
+  }
+
   // UPDATE
   updateChapter(cid: number, updateChapterDto: UpdateChapterDto) {
     return this.chapterRepository.update(cid, updateChapterDto);

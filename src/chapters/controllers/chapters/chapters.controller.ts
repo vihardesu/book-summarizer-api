@@ -28,6 +28,11 @@ export class ChaptersController {
     return this.chapterService.getChapters();
   }
 
+  @Get('isbn_ten/:isbn_ten')
+  getChaptersByIsbnTen(@Param('isbn_ten') isbn_ten: string) {
+    return this.chapterService.getChaptersByIsbnTen(isbn_ten);
+  }
+
   @Get('cid/:cid')
   @UsePipes(ValidationPipe)
   findChapterByName(@Param('cid', ParseIntPipe) cid: number) {

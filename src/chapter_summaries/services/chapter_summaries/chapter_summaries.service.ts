@@ -34,6 +34,7 @@ export class ChapterSummariesService {
     //return this.chapter_summaryRepository.find({ where: { isbn_ten: isbn_ten }, select: ['summary_type'] });
     return await this.chapter_summaryRepository.createQueryBuilder('entity')
       .select('summary_type')
+      .where('isbn_ten = :isbn_ten', { isbn_ten: isbn_ten })
       .distinct(true)
       .getRawMany()
       .then((result) => result.map((item) => item.summary_type))

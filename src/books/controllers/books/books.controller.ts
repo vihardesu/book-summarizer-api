@@ -17,12 +17,7 @@ import { BooksService } from 'src/books/services/books/books.service';
 export class BooksController {
   constructor(private readonly bookService: BooksService) { }
 
-  @Post('create')
-  @UsePipes(ValidationPipe)
-  createBooks(@Body() createBookDto: CreateBookDto) {
-    return this.bookService.createBook(createBookDto);
-  }
-
+  //GET
   @Get()
   getBooks() {
     return this.bookService.getBooks();
@@ -33,12 +28,26 @@ export class BooksController {
     return this.bookService.findBookByTitle(title);
   }
 
+  @Get('search/query/:query')
+  findBooksByQuery(@Param('query') query: string) {
+    return this.bookService.findBooksByQuery(query);
+  }
+
+  //DELETE
   @Delete('delete/:isbn_ten')
   @UsePipes(ValidationPipe)
   deleteBook(@Param('isbn_ten') isbn_ten: string) {
     return this.bookService.deleteBook(isbn_ten);
   }
 
+  //POST
+  @Post('create')
+  @UsePipes(ValidationPipe)
+  createBooks(@Body() createBookDto: CreateBookDto) {
+    return this.bookService.createBook(createBookDto);
+  }
+
+  //Update
   @Post('update/:isbn_ten')
   @UsePipes(ValidationPipe)
   updateBook(@Param('isbn_ten') isbn_ten: string, @Body() updateBookDto: UpdateBookDto) {

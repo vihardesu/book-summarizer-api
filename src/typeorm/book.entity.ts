@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, PrimaryColumn, OneToMany } from 'typeorm';
 import { Chapter } from 'src/typeorm/chapter.entity';
+import { Request } from 'src/typeorm/request.entity';
 import { Summary } from './summary.entity';
 
 @Entity()
@@ -78,6 +79,11 @@ export class Book {
         cascade: true
     })
     chapters: Chapter[];
+
+    @OneToMany(type => Request, request => request.book, {
+        cascade: true
+    })
+    requests: Request[];
 
     @OneToMany(type => Summary, summary => summary.book, {
         cascade: true

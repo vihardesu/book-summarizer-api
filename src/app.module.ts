@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { QueueModule } from './queue/queue.module';
 import { BooksModule } from './books/books.module';
 import { ChaptersModule } from './chapters/chapters.module';
+import { RequestsModule } from './requests/requests.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './typeorm';
 import { SummariesModule } from './summaries/summaries.module';
@@ -43,6 +44,7 @@ import { ChapterSummariesModule } from './chapter_summaries/chapter_summaries.mo
     ChaptersModule,
     SummariesModule,
     ChapterSummariesModule,
+    RequestsModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Raw } from 'typeorm';
 import { Book } from 'src/typeorm/book.entity';
 import { Repository } from 'typeorm';
 import { CreateBookDto } from 'src/books/dtos/CreateBook.dto';
@@ -14,7 +15,7 @@ export class BooksService {
   // CREATE
   createBook(createBookDto: CreateBookDto) {
     const newBook = this.bookRepository.create(createBookDto);
-    return this.bookRepository.save(newBook);
+    return this.bookRepository.insert(newBook);
   }
 
   // READ
@@ -24,6 +25,17 @@ export class BooksService {
 
   findBookByTitle(title: string) {
     return this.bookRepository.findOne({ where: { title: title } });
+  }
+
+  async findBooksByQuery(query: string) {
+    return await this.bookRepository
+      .find({
+        where: [
+          { title: Raw(title => `${title} ILIKE '%${query}%'`) },
+          { authors: Raw(authors => `${authors} ILIKE '%${query}%'`) },
+          { subtitle: Raw(subtitle => `${subtitle} ILIKE '%${query}%'`) },
+        ],
+      });
   }
 
   // UPDATE

@@ -38,6 +38,11 @@ export class ChapterSummariesController {
     return this.chapter_summaryService.findChapterSummariesByTypeAndIsbn(isbn_ten, summary_type);
   }
 
+  @Get('summary_types/:isbn_ten')
+  findChapterSummaryTypes(@Param('isbn_ten') isbn_ten: string) {
+    return this.chapter_summaryService.findChapterSummaryTypes(isbn_ten);
+  }
+
   @Delete('delete/:csid')
   @UsePipes(ValidationPipe)
   deleteChapterSummary(@Param('csid') csid: string) {

@@ -27,7 +27,16 @@ export class ChapterSummariesService {
   }
 
   findChapterSummariesByTypeAndIsbn(isbn_ten: string, summary_type: string) {
-    return this.chapter_summaryRepository.find({ where: { isbn_ten: isbn_ten, summary_type: summary_type } });
+    return this.chapter_summaryRepository.find({ where: { isbn_ten: isbn_ten, summary_type: summary_type }, order: { sequence_index: 'ASC' } });
+  }
+
+  async findChapterSummaryTypes(isbn_ten: string) {
+    //return this.chapter_summaryRepository.find({ where: { isbn_ten: isbn_ten }, select: ['summary_type'] });
+    return await this.chapter_summaryRepository.createQueryBuilder('entity')
+      .select('summary_type')
+      .distinct(true)
+      .getRawMany()
+      .then((result) => result.map((item) => item.summary_type));
   }
 
   // UPDATE

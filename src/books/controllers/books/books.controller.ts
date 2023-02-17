@@ -24,13 +24,18 @@ export class BooksController {
   }
 
   @Get('title/:title')
-  findBooksById(@Param('title') title: string) {
+  findBooksByTitle(@Param('title') title: string) {
     return this.bookService.findBookByTitle(title);
   }
 
   @Get('search/query/:query')
   findBooksByQuery(@Param('query') query: string) {
     return this.bookService.findBooksByQuery(query);
+  }
+
+  @Get('books_with_contents')
+  findBooksWithContents() {
+    return this.bookService.findBooksWithContents();
   }
 
   //DELETE

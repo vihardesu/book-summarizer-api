@@ -92,6 +92,22 @@ export class AppService {
     return response;
   }
 
+  async openai_parallel_single_with_concatenation(chunks: Array<any>) {
+    const get_summary = async (chunk: string) => {
+      let response = await sendOneRequest(chunk, this.openaiClient).catch(
+        (err) => {
+          throw new Error('OpenAI failed to get a summary of the article');
+        },
+      );
+      response = cleanSummary(response);
+      return response;
+    };
+    const unresolvedPromises = chunks.map(get_summary);
+    const summaries = await Promise.all(unresolvedPromises)
+    const summary = summaries.join('\r\n');
+    return summary;
+  }
+
   async openai_single_bullets(short_text: string) {
     const response = await sendOneRequestForBulletPoints(
       short_text,

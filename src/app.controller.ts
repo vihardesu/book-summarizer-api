@@ -14,11 +14,12 @@ import { AppService } from './app.service';
 import { Request } from 'express';
 import { error } from 'console';
 import { LoggingInterceptor } from './interceptors/logger.interceptor';
+import { ApiBody, ApiProperty } from '@nestjs/swagger';
 
 @UseInterceptors(LoggingInterceptor)
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getHello(): string {
@@ -106,6 +107,20 @@ export class AppController {
       throw new BadRequestException('Something bad happened', {
         cause: new Error(),
         description: `Openai could not summarize text: ${body.short_text} because ${error}`,
+      });
+    }
+  }
+
+  @ApiBody({ description: "body:any someMethod" })
+  @Post('openai_single_chunks')
+  async openai_parallel_single_with_concatenation(@Body() body): Promise<string> {
+    try {
+      const chunks = body.chunks;
+      return await this.appService.openai_parallel_single_with_concatenation(chunks);
+    } catch (error) {
+      throw new BadRequestException('Something bad happened', {
+        cause: new Error(),
+        description: `Openai could not summarize text because ${error}`,
       });
     }
   }

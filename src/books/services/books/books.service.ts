@@ -38,6 +38,14 @@ export class BooksService {
       });
   }
 
+  async findBooksWithContents() {
+    return await this.bookRepository
+      .createQueryBuilder('book')
+      .leftJoin('book.chapters', 'Chapter')
+      .where('Chapter.isbn_ten IS NOT NULL')
+      .getMany();
+  }
+
   // UPDATE
   updateBook(isbn_ten: string, updateBookDto: UpdateBookDto) {
     return this.bookRepository.update(isbn_ten, updateBookDto);

@@ -102,6 +102,11 @@ export class AppService {
       response = cleanSummary(response);
       return response;
     };
+    // For some reason, if chunks is a single element array, it turns into a string
+    // This checks if its a string and converts it back to an array
+    if (typeof (chunks) == 'string') {
+      chunks = [chunks]
+    }
     const unresolvedPromises = chunks.map(get_summary);
     const summaries = await Promise.all(unresolvedPromises)
     const summary = summaries.join('\r\n');

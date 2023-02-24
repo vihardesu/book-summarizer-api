@@ -27,6 +27,10 @@ export class BooksService {
     return this.bookRepository.findOne({ where: { title: title } });
   }
 
+  findBookByIsbnTen(isbn_ten: string) {
+    return this.bookRepository.findOne({ where: { isbn_ten: isbn_ten } });
+  }
+
   async findBooksByQuery(query: string) {
     return await this.bookRepository
       .find({

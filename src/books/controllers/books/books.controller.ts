@@ -22,6 +22,11 @@ export class BooksController {
   getBooks() {
     return this.bookService.getBooks();
   }
+  
+  @Get('isbn_ten/:isbn_ten')
+  findBookByIsbnTen(@Param('isbn_ten') isbn_ten: string) {
+    return this.bookService.findBookByIsbnTen(isbn_ten);
+  }
 
   @Get('title/:title')
   findBooksByTitle(@Param('title') title: string) {

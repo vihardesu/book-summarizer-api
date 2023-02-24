@@ -1,13 +1,13 @@
 import { IsString, IsNotEmpty, MinLength, IsISBN, IsOptional, IsUrl } from "class-validator";
 
 export class UpdateBookDto {
-    @IsNotEmpty()
+    @IsOptional()
     title: string;
 
     @IsOptional()
     subtitle?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     authors: string;
 
     @IsOptional()
@@ -29,7 +29,6 @@ export class UpdateBookDto {
     @IsUrl()
     thumbnail: string;
 
-    @IsNotEmpty()
-    @IsString()
+    @IsOptional()
     isbn_thirteen: string;
 }

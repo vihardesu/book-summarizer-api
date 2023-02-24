@@ -14,7 +14,7 @@ export class ChaptersService {
   // CREATE
   createChapter(createChapterDto: CreateChapterDto) {
     const newChapter = this.chapterRepository.create(createChapterDto);
-    return this.chapterRepository.save(newChapter);
+    return this.chapterRepository.insert(newChapter);
   }
 
   // READ

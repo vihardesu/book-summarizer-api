@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { Book } from 'src/typeorm/book.entity';
 import { ChapterSummary } from 'src/typeorm/chapter_summary.entity';
 
+@Unique('unique_chapters', ['isbn_ten', 'sequence_index'])
 @Entity()
 export class Chapter {
     @PrimaryGeneratedColumn({

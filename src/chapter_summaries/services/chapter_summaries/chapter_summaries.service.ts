@@ -38,7 +38,7 @@ export class ChapterSummariesService {
       .distinct(true)
       .getRawMany()
       .then((result) => result.map((item) => item.summary_type))
-      .then((result) => result.sort());
+      .then((result) => result.sort().reverse());
   }
 
   // UPDATE

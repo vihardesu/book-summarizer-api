@@ -9,6 +9,7 @@ import {
   HttpStatus,
   BadRequestException,
   Logger,
+  Param,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request } from 'express';
@@ -25,6 +26,18 @@ export class AppController {
   getHello(): string {
     try {
       return this.appService.getHello();
+    } catch (error) {
+      throw new BadRequestException('Something bad happened', {
+        cause: new Error(),
+        description: 'Some error description',
+      });
+    }
+  }
+
+  @Get('google_books_query/:query')
+  getBookMetadataFromGoogle(@Param('query') query: string): any {
+    try {
+      return this.appService.getBookMetadataFromGoogle(query);
     } catch (error) {
       throw new BadRequestException('Something bad happened', {
         cause: new Error(),

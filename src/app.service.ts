@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import YoutubeTranscript from 'youtube-transcript';
 import { embedlyFetch } from './helpers/embedly_fetch';
-import { fetchBookMetadata } from './helpers/google_books_fetch';
+import { fetchBookSearchMetadata, fetchBookById } from './helpers/google_books_fetch';
 import {
   ARTICLE_LENGTH,
   cleanSummary,
@@ -35,7 +35,14 @@ export class AppService {
   }
 
   async getBookMetadataFromGoogle(query: string): Promise<any> {
-    const response = await fetchBookMetadata(query).catch((e) => {
+    const response = await fetchBookSearchMetadata(query).catch((e) => {
+      throw new Error('fetch book metadata went wrong');
+    });
+    return response
+  }
+
+  async getBookByIdFromGoogle(id: string): Promise<any> {
+    const response = await fetchBookById(id).catch((e) => {
       throw new Error('fetch book metadata went wrong');
     });
     return response

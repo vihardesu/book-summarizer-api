@@ -38,6 +38,7 @@ export class BooksService {
           { title: Raw(title => `${title} ILIKE '%${query}%'`) },
           { authors: Raw(authors => `${authors} ILIKE '%${query}%'`) },
           { subtitle: Raw(subtitle => `${subtitle} ILIKE '%${query}%'`) },
+          { google_book_id: Raw(google_book_id => `${google_book_id} ILIKE '%${query}%'`) },
         ],
       });
   }

@@ -75,7 +75,7 @@ export class Book {
     isbn_thirteen: string;
 
     @Column({
-        nullable: true,
+        nullable: false,
         default: '',
     })
     google_book_id: string;

@@ -74,6 +74,12 @@ export class Book {
     })
     isbn_thirteen: string;
 
+    @Column({
+        nullable: false,
+        default: '',
+    })
+    google_book_id: string;
+
 
     @OneToMany(type => Chapter, chapter => chapter.book, {
         cascade: true

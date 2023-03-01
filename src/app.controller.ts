@@ -46,6 +46,18 @@ export class AppController {
     }
   }
 
+  @Get('get_google_books_metadata_by_id/:id')
+  getBookByIdFromGoogle(@Param('id') id: string): any {
+    try {
+      return this.appService.getBookByIdFromGoogle(id);
+    } catch (error) {
+      throw new BadRequestException('Something bad happened', {
+        cause: new Error(),
+        description: 'Some error description',
+      });
+    }
+  }
+
   @Post('embedly')
   async embedly(@Body() body): Promise<string> {
     try {

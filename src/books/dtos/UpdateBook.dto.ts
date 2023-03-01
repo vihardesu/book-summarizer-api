@@ -31,4 +31,7 @@ export class UpdateBookDto {
 
     @IsOptional()
     isbn_thirteen: string;
+
+    @IsOptional()
+    google_book_id: string;
 }

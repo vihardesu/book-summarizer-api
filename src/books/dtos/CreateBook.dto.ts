@@ -36,4 +36,9 @@ export class CreateBookDto {
     @IsNotEmpty()
     @IsString()
     isbn_thirteen: string;
+
+    @IsNotEmpty()
+    @IsString()
+    google_book_id: string;
+
 }

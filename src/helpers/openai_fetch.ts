@@ -65,17 +65,55 @@ export const generateTitle = async (text: string, openaiClient) => {
 
 /* For small articles, send one API request */
 export const sendOneRequest = async (text: string, openaiClient) => {
+  // const response = await openaiClient
+  //   .createCompletion({
+  //     model: 'text-davinci-003', //gpt-3.5-turbo	or text-davinci-003
+  //     prompt: `${text}\n\nTl;dr`,
+  //     temperature: 0.7,
+  //     max_tokens: 500,
+  //     top_p: 1.0,
+  //     frequency_penalty: 0.0,
+  //     presence_penalty: 1,
+  //   })
+  //   .then((res) => {
+  //     console.log(res)
+  //     return res
+  //   })
+  //   .then((res) => res.data.choices[0].text)
+  //   .catch((e) => {
+  //     throw new Error(e);
+  //   });
   const response = await openaiClient
-    .createCompletion({
-      model: 'text-davinci-003',
-      prompt: `${text}\n\nTl;dr`,
+    .createChatCompletion({
+      model: 'gpt-3.5-turbo', //gpt-3.5-turbo	or text-davinci-003
+      //prompt: `${text}\n\nTl;dr`,
+      messages: [{ role: "user", content: `Summarize this: "${text}"` }],
       temperature: 0.7,
       max_tokens: 500,
       top_p: 1.0,
       frequency_penalty: 0.0,
       presence_penalty: 1,
     })
-    .then((res) => res.data.choices[0].text)
+    .then((res) => res.data.choices[0].message.content)
+    .catch((e) => {
+      throw new Error(e);
+    });
+  return response;
+};
+
+/* Send a custom prompt to chat-gpt */
+export const sendPrompt = async (prompt: string, openaiClient) => {
+  const response = await openaiClient
+    .createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.7,
+      max_tokens: 500,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 1,
+    })
+    .then((res) => res.data.choices[0].message.content)
     .catch((e) => {
       throw new Error(e);
     });

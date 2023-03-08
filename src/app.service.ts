@@ -13,6 +13,7 @@ import {
   sendMultipleRequestsAndGetBulletPoints,
   sendOneRequest,
   sendOneRequestForBulletPoints,
+  sendPrompt,
   splitArticleTokens,
 } from './helpers/openai_fetch';
 import { setTinqHeaders, tinqFetch } from './helpers/tinq_fetch';
@@ -99,6 +100,16 @@ export class AppService {
 
   async openai_single(short_text: string) {
     let response = await sendOneRequest(short_text, this.openaiClient).catch(
+      (err) => {
+        throw new Error('OpenAI failed to get a summary of the article');
+      },
+    );
+    response = cleanSummary(response);
+    return response;
+  }
+
+  async openai_custom_prompt(prompt: string) {
+    let response = await sendPrompt(prompt, this.openaiClient).catch(
       (err) => {
         throw new Error('OpenAI failed to get a summary of the article');
       },

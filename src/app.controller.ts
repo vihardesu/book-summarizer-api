@@ -123,6 +123,7 @@ export class AppController {
     }
   }
 
+  @ApiBody({ description: "body:any someMethod" })
   @Post('openai_single')
   async openai_single(@Body() body): Promise<string> {
     try {
@@ -132,6 +133,20 @@ export class AppController {
       throw new BadRequestException('Something bad happened', {
         cause: new Error(),
         description: `Openai could not summarize text: ${body.short_text} because ${error}`,
+      });
+    }
+  }
+
+  @ApiBody({ description: "body:any someMethod" })
+  @Post('openai_prompt')
+  async openai_prompt(@Body() body): Promise<string> {
+    try {
+      const prompt = body.prompt;
+      return await this.appService.openai_custom_prompt(prompt);
+    } catch (error) {
+      throw new BadRequestException('Something bad happened', {
+        cause: new Error(),
+        description: `Openai could not summarize text: ${body.prompt} because ${error}`,
       });
     }
   }
@@ -150,6 +165,8 @@ export class AppController {
     }
   }
 
+
+  @ApiBody({ description: "body:any someMethod" })
   @Post('openai_multiple')
   async openai_multiple(@Body() body): Promise<string> {
     try {

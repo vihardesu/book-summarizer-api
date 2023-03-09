@@ -87,7 +87,7 @@ export const sendOneRequest = async (text: string, openaiClient) => {
     .createChatCompletion({
       model: 'gpt-3.5-turbo', //gpt-3.5-turbo	or text-davinci-003
       //prompt: `${text}\n\nTl;dr`,
-      messages: [{ role: "user", content: `Summarize this: "${text}"` }],
+      messages: [{ role: "user", content: `"${text}"\n\nTl;dr` }],
       temperature: 0.7,
       max_tokens: 500,
       top_p: 1.0,

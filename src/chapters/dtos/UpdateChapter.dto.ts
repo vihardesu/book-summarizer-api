@@ -1,7 +1,6 @@
 import { IsString, IsNotEmpty, MinLength, IsInt, IsOptional } from "class-validator";
 
 export class UpdateChapterDto {
-
     @IsOptional()
     @IsString()
     name: string;
@@ -13,4 +12,7 @@ export class UpdateChapterDto {
     @IsOptional()
     @IsString()
     contents: string;
+
+    @IsOptional()
+    part: string;
 }

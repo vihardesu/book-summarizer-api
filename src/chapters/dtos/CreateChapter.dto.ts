@@ -1,9 +1,12 @@
-import { IsString, IsNotEmpty, MinLength } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional, MinLength } from "class-validator";
 
 export class CreateChapterDto {
     @IsNotEmpty()
     @IsString()
     isbn_ten: string;
+
+    @IsOptional()
+    part: string;
 
     @IsNotEmpty()
     name: string;

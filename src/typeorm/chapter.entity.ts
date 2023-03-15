@@ -12,6 +12,12 @@ export class Chapter {
     id: number;
 
     @Column({
+        nullable: true,
+        default: '',
+    })
+    part: string;
+
+    @Column({
         nullable: false,
         default: '',
     })
